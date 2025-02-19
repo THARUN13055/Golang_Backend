@@ -5,7 +5,9 @@ import (
 	"log"
 	"log/slog"
 	"net/http"
+	"os"
 	"tharun13055/chi_mongo/db"
+	"tharun13055/chi_mongo/repository/mongodb"
 	"tharun13055/chi_mongo/usecase"
 
 	"github.com/go-chi/chi/middleware"
@@ -23,13 +25,20 @@ func init() {
 }
 
 func main() {
-
-	mongoclient := db.MongoConnection()
-
-	defer mongoclient.Disconnect(context.Background())
-
 	//userservice importing instance
-	userService := usecase.UserService{}
+	mongodbClient := db.MongoConnection()
+	defer mongodbClient.Disconnect(context.Background())
+
+	collection := mongodbClient.Database(os.Getenv("MONGO_DB_NAME")).Collection(os.Getenv("MONGO_COLLECTION_NAME"))
+
+	// userservice ubstabce
+	userService := usecase.UserService{
+		DBClient: mongodb.MongoCLient{
+			Client: *collection,
+		},
+	}
+
+	userService = usecase.UserService{}
 	r := chi.NewRouter()
 	r.Use(middleware.Logger)
 	r.Get("/health", func(w http.ResponseWriter, r *http.Request) {
@@ -45,5 +54,4 @@ func main() {
 	})
 
 	http.ListenAndServe(":8080", r)
-
 }
