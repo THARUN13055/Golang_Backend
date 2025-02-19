@@ -1,9 +1,11 @@
 package main
 
 import (
+	"context"
 	"log"
 	"log/slog"
 	"net/http"
+	"tharun13055/chi_mongo/db"
 	"tharun13055/chi_mongo/usecase"
 
 	"github.com/go-chi/chi/middleware"
@@ -21,8 +23,12 @@ func init() {
 }
 
 func main() {
-	//userservice importing instance
 
+	mongoclient := db.MongoConnection()
+
+	defer mongoclient.Disconnect(context.Background())
+
+	//userservice importing instance
 	userService := usecase.UserService{}
 	r := chi.NewRouter()
 	r.Use(middleware.Logger)
