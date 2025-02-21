@@ -31,7 +31,7 @@ func MongoConnection() *mongo.Client {
 
 	// sending the ping that it is working or not
 
-	if err := client.Database(os.Getenv("MONGO_DB_NAME")).RunCommand(context.TODO(), bson.D{{"ping", 1}}).Err(); err != nil {
+	if err := client.Database(os.Getenv("MONGO_DB_NAME")).RunCommand(context.TODO(), bson.M{"ping": 1}).Err(); err != nil {
 		panic(err)
 	}
 
