@@ -8,8 +8,7 @@ type UserRequest struct {
 	Email string             `bson: "email,omitempty"`
 }
 
-
 type UserResponse struct {
-	Data interface{} `json: "data,omitempty"`
-	Error string `json: "error,omitempty`
+	Data  interface{} `json: "data,omitempty"`
+	Error string      `json: "error,omitempty`
 }
