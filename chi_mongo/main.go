@@ -13,7 +13,6 @@ import (
 	"github.com/go-chi/chi/middleware"
 	"github.com/go-chi/chi/v5"
 	"github.com/joho/godotenv"
-	"go.mongodb.org/mongo-driver/mongo"
 )
 
 func init() {
@@ -32,9 +31,9 @@ func main() {
 
 	collection := mongodbClient.Database(os.Getenv("MONGO_DB_NAME")).Collection(os.Getenv("MONGO_COLLECTION_NAME"))
 
- // userservice ubstabce
-  userService :=  usecase.UserService {
-		DBClient: mongodb.MongoCLient {
+	// userservice ubstabce
+	userService := usecase.UserService{
+		DBClient: mongodb.MongoCLient{
 			Client: *collection,
 		},
 	}
