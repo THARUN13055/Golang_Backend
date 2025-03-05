@@ -18,7 +18,7 @@ type UserController struct {
 }
 
 // NewUser Controller creates a new UserController
-func NewUser Controller(collection *mongo.Collection) *User Controller {
+func NewUser Controller(collection *mongo.Collection) *UserController {
 	return &User Controller{collection}
 }
 
