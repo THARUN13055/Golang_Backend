@@ -77,6 +77,50 @@ func GetBooks(w http.ResponseWriter, r *http.Request) {
 
 }
 
+func AddBook(w http.ResponseWriter, r *http.Request) {
+	var NewBook datatypes.Book
+
+	// Getting data will be in json so we changing into normal
+	err := json.NewDecoder(r.Body).Decode(&NewBook)
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte("Given value is not decoding"))
+		return
+	}
+
+	// now we need to add the data
+
+	// Check there is bookname or not
+	if NewBook.Name == "" {
+		http.Error(w, "There is not Book name founded", http.StatusBadRequest)
+		return
+	}
+
+	// Here we are checking if book is already exists or not
+	for _, CheckBookName := range data.Book {
+		if CheckBookName == NewBook.Name {
+			http.Error(w, "Book already exists", http.StatusConflict)
+			return
+		}
+	}
+
+	// Here we are added the id as maxid +1
+	newid := 0
+	for id := range data.Book {
+		if id > newid {
+			newid = id
+		}
+	}
+	
+	// asign the newbook id
+	newid++
+	data.Book[newid] = NewBook.Name
+
+	// Added the new book
+	w.WriteHeader(http.StatusCreated)
+	w.Write([]byte("The Book is added sucessfully"))
+}
+
 func DeleteBook(w http.ResponseWriter, r *http.Request) {
 	// For delete the specific book we need to get the id from the request
 	vars := mux.Vars(r)
@@ -107,6 +151,3 @@ func DeleteBook(w http.ResponseWriter, r *http.Request) {
 
 }
 
-func AddBook(w http.ResponseWriter, r *http.Request) {
-
-}

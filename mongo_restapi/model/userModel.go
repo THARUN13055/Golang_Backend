@@ -6,5 +6,4 @@ type User struct {
 	ID    primitive.ObjectID `bson:"_id,omitempty"`
 	Name  string             `bson:"name"`
 	Email string             `bson:"email"`
-	Date  primitive.DateTime `bson:"_date,omitempty"`
 }

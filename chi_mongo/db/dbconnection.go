@@ -38,5 +38,4 @@ func MongoConnection() *mongo.Client {
 	fmt.Println("Database is successfully connected")
 
 	return client
-
 }

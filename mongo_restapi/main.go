@@ -18,7 +18,7 @@ func main() {
 	defer client.Disconnect(nil)
 
 	// Set up routes
-	router := routes.SetupRouter()
+	// router := routes.SetupRouter()
 
 	log.Fatal(http.ListenAndServe(":8080", router))
 	fmt.Println("server is started")

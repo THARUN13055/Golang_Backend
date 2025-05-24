@@ -13,3 +13,5 @@ var Book = map[int]string{
 }
 
 var Order = make(map[string][]int)
+
+var NumberofReq int
