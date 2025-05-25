@@ -1,0 +1,9 @@
+services:
+  mongodb:
+    image: mongo:4.0-xenial
+    container_name: mux-mongodb          
+    ports:                                
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: username
+      MONGO_INITDB_ROOT_PASSWORD: password

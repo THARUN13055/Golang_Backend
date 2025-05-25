@@ -14,7 +14,7 @@ func DB_Connection() *mongo.Client {
 	cxt, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
-	client, err := mongo.Connect(cxt, options.Client().ApplyURI("mongodb://tharun@password:27017/tharun"))
+	client, err := mongo.Connect(cxt, options.Client().ApplyURI("mongodb://username:password@localhost:27017"))
 	if err != nil {
 		log.Panic(err)
 	}
