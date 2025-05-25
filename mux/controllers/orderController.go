@@ -39,7 +39,7 @@ func OrderBooks(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Now we need to check book id is exists or not
-	bookexist := db.OrderCollection.FindOne(ctx, bson.M{"book_id": bookid})
+	bookexist := db.BookCollection.FindOne(ctx, bson.M{"book_id": bookid})
 	if bookexist.Err() != nil {
 		w.WriteHeader(http.StatusNotFound)
 		w.Write([]byte("Here we cant able to find the book"))
