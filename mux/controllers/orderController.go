@@ -23,7 +23,7 @@ func OrderBooks(w http.ResponseWriter, r *http.Request) {
 	// Here we are getting the url of the book
 	vars := mux.Vars(r)
 
-	bookIdstr, errbool := vars["book_id"]
+	bookIdstr, errbool := vars["id"]
 	if !errbool {
 		w.WriteHeader(http.StatusNotFound)
 		w.Write([]byte("id not founded"))
@@ -39,7 +39,7 @@ func OrderBooks(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Now we need to check book id is exists or not
-	bookexist := db.BookCollection.FindOne(ctx, bson.M{"book_id": bookid})
+	bookexist := db.BookCollection.FindOne(ctx, bson.M{"_id": bookid})
 	if bookexist.Err() != nil {
 		w.WriteHeader(http.StatusNotFound)
 		w.Write([]byte("Here we cant able to find the book"))

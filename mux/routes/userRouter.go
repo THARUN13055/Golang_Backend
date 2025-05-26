@@ -7,6 +7,6 @@ import (
 )
 
 func UserRoutes(router *mux.Router) {
-	router.HandleFunc("/login", controllers.Login)
+	router.HandleFunc("/login", controllers.Login).Methods("POST")
 	router.HandleFunc("/signup", controllers.Signup)
 }

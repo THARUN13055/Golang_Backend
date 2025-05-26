@@ -8,6 +8,6 @@ import (
 )
 
 func OrderRoutes(router *mux.Router) {
-	router.HandleFunc("/orderbook/{book_id}", middleware.ValidateUser(controllers.OrderBooks))
+	router.HandleFunc("/orderbook/{id}", middleware.ValidateUser(controllers.OrderBooks))
 	router.HandleFunc("/getorders", middleware.ValidateUser(controllers.GetAllOrders))
 }
